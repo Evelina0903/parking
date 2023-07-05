@@ -1,6 +1,23 @@
 @extends('layout')
 
 @section('content')
+
+<script>
+    function fieldActivation() {
+        var option = document.querySelector('input[name="option"]:checked').value;
+        if (option === "option1") {
+            document.getElementById("clientField").style.display = "none";
+            document.getElementById("carField").style.display = "block";
+        } else if (option === "option2") {
+            document.getElementById("clientField").style.display = "block";
+            document.getElementById("carField").style.display = "none";
+        }
+
+    }
+ 
+    
+</script>
+
 <div class="container">
 
     <p class="fs-2 text-center">Добавить новую запись</p>
@@ -39,7 +56,7 @@
             <label class="col-sm-2 col-form-label">Статус автомобиля</label>
             <div class="col-sm-10">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected></option>
+                    <option selected>Выбери статус автомобиля</option>
                     <option value="1">Автомобиль наодится на стоянке</option>
                     <option value="2">Автомобиль отсутствует на стоянке</option>
                 </select>
@@ -48,58 +65,68 @@
 
         <div class="row mt-3">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="option" value="option1" onclick="fieldActivation()" id="flexRadioDefault1" checked>
                 <p class="fs-5">Добавить клиента:</p>
             </div>
         </div>
 
-        <div class="row mt-3">
-            <label class="col-sm-2 col-form-label">Выбрать существуещего</label>
-            <div class="col-sm-10">
-               
-                <select class="form-select" aria-label="Default select example">
-                    <option selected></option>
-                    <option value="1">к</option>
-                </select>
-              
+
+        <div id="carField" >
+            <div class="row mt-3">
+                <label class="col-sm-2 col-form-label">Выбрать существуещего</label>
+
+                <div class="col-sm-10">
+
+                    <select name="id_client" class="form-select" aria-label="Default select example">
+                        <option selected>Выбери клиента</option>
+                        @foreach ($clients as $client)
+                        <option value="{{$client-> id}}">{{$client->fio}}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+
             </div>
         </div>
 
-        <!-- <div class="row mt-3">
+        <div class="row mt-3">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <input class="form-check-input" type="radio" name="option" value="option2" onclick="fieldActivation()" id="flexRadioDefault2" >
                 <p class="fs-5">Или создать нового:</p>
             </div>
         </div>
 
-        <div class="row mt-3">
-            <label class="col-sm-2 col-form-label">ФИО</label>
-            <div class="col-sm-10">
-                <input name="fio" class="form-control" placeholder="Введите ФИО клиента">
+        <div id="clientField" >
+            <div class="row mt-3">
+                <label class="col-sm-2 col-form-label">ФИО</label>
+                <div class="col-sm-10">
+                    <input name="fio" class="form-control" placeholder="Введите ФИО клиента">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <label class="col-sm-2 col-form-label">Пол</label>
+                <div class="col-sm-10">
+                    <select name="gender" class="form-select" aria-label="Default select example">
+                        <option selected>Выбери пол</option>
+                        <option value="0">мужской</option>
+                        <option value="1">женский</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <label class="col-sm-2 col-form-label">Номер</label>
+                <div class="col-sm-10">
+                    <input name="number" class="form-control" placeholder="Введите номер клиента">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <label class="col-sm-2 col-form-label">Адрес</label>
+                <div class="col-sm-10">
+                    <input name="addres" class="form-control" placeholder="Введите адрес клиента">
+                </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <label class="col-sm-2 col-form-label">Пол</label>
-            <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected></option>
-                    <option value="1">мужской</option>
-                    <option value="2">женский</option>
-                </select>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <label class="col-sm-2 col-form-label">Номер</label>
-            <div class="col-sm-10">
-                <input name="number" class="form-control" placeholder="Введите номер клиента">
-            </div>
-        </div>
-        <div class="row mt-3">
-            <label class="col-sm-2 col-form-label">Адрес</label>
-            <div class="col-sm-10">
-                <input name="addres" class="form-control" placeholder="Введите адрес клиента">
-            </div>
-        </div> -->
+
         <div class="row mt-3 mb-3">
             <div class="d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-outline-dark">Сохранить</button>
