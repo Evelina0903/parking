@@ -5,12 +5,12 @@
     padding-bottom: 10px;
 }
 
-.add {
+.btn {
     width: fit-content;
     height: fit-content;
     align-items: center;
 }
 
 #clientField{
-  display: none;  
+  display: none;
 }

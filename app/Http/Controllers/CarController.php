@@ -28,7 +28,8 @@ class CarController extends Controller
     {
         $clients = Client::getAll();
         return view('form-create', compact('clients'));
-        
+
+
     }
 
     /**
@@ -36,7 +37,36 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $request->validate([
+            'brand' => 'required',
+            'model' => 'required',
+            'color' => 'required',
+            'rf_number' => 'required',
+            'fio' => 'required|min:3',
+            'number' => 'required',
+
+        ]);
+
+
+
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'option' => 'required|string|in:option1,option2',
+            // Add validation rules for other fields if needed
+        ]);
+
+        if ($validatedData['option']  === 'option1') {
+            Car::create($request->only(['brand', 'model', 'color', 'rf_number', 'parking', 'id_client']));
+            return redirect()->route('cars.index');
+        }
+        else if ($validatedData['option'] === 'option2'){
+            $client_id = Client::create($request->only(['fio', 'gender', 'number','addres']));
+            Car::createByParametrAndClientId($request->only(['brand', 'model', 'color', 'rf_number', 'parking']), $client_id);
+            return redirect()->route('cars.index');
+        }
+
+        //dd($request->all());
     }
 
     /**
@@ -44,7 +74,7 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+//        return view("show");
     }
 
     /**
@@ -52,7 +82,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $clients = Client::getAll();
+        return view('form-edit', compact('clients'));
     }
 
     /**

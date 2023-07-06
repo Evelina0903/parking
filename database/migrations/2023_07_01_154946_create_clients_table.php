@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('fio');
+            $table->string('fio', '255');
             $table->tinyInteger('gender');
-            $table->integer('number')->unique();
-            $table->string('addres')->nullabel();
+            $table->string('number', '15')->unique();
+            $table->string('addres')->nullable();
         });
     }
 

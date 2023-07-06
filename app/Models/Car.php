@@ -10,11 +10,34 @@ use Illuminate\Support\Facades\DB;
 class Car extends Model
 {
     use HasFactory;
-    
+
+    public static function create($params)
+    {
+        DB::table('cars')->insert([
+            'brand'=>$params['brand'],
+            'model'=>$params['model'],
+            'color'=>$params['color'],
+            'rf_number'=>$params['rf_number'],
+            'parking'=>$params['parking'],
+            'id_client'=>$params['id_client'],
+        ]);
+    }
+
+    public static function createByParametrAndClientId($params, $client_id){
+        DB::table('cars')->insert([
+            'brand'=>$params['brand'],
+            'model'=>$params['model'],
+            'color'=>$params['color'],
+            'rf_number'=>$params['rf_number'],
+            'parking'=>$params['parking'],
+            'id_client'=>$client_id,
+        ]);
+    }
+
     public static function getAll()
     {
         $cars = DB::table('cars')->get();
-        
+
         return $cars;
     }
 
