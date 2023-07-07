@@ -15,6 +15,12 @@ use App\Http\Controllers\CarController;
 */
 Route::get('/edit/{idCar}/{idClient}/editCarClient', [CarController::class, 'editCarClient'])->whereNumber(['idCar','idClient']);
 
+
+Route::get('/cars/{idCar}/{idClient}/deleteCarClient', [CarController::class, 'deleteCarClient'])->whereNumber(['idCar','idClient']);
+
+
+Route::get('/parkingCarClient', [CarController::class, 'parkingCarClient']);
+
 Route::put('/updateCarClient', [CarController::class, 'updateCarClient']);
 
 Route::resource('/cars', CarController::class);

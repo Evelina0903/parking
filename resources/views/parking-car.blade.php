@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <p class="fs-2 text-center">Редактировать запись</p>
+        <p class="fs-2 text-center">Стоянка</p>
         <a href="{{ route('cars.index') }}" class="btn btn-outline-dark">
             Вернуться
         </a>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="row mt-3">
-                <label class="col-sm-2 col-form-label">МАшина</label>
+                <label class="col-sm-2 col-form-label">Машина</label>
             </div>
             <div class="row mt-3">
                 <label class="col-sm-2 col-form-label">Статус автомобиля</label>

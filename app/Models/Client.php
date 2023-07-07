@@ -44,5 +44,13 @@ class Client extends Model
     {
         return DB::table('clients')->where('id', $id)->first();
     }
-
+    public static function getCountCars($id)
+    {
+        return DB::table('clients')->select(DB::raw('COUNT(cars.id) as carCount'))->join('cars', 'clients.id', '=', 'cars.id_client')
+            ->where('clients.id', $id)->first();
+    }
+    public static function deleteById($id)
+    {
+        return DB::table('clients')->where('id','=', (integer)$id)->delete();
+    }
 }

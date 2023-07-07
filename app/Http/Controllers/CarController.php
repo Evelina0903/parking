@@ -84,13 +84,11 @@ class CarController extends Controller
 //
     }
 
-    public function editCarClient(Request $request, $idCar, $idClient)
+    public function editCarClient(Request $request)
     {
-        //var_dump($idCar);
-        //var_dump($idClient);
-        //die();
-        $car = Car::getById($idCar);
-        $client = Client::getById($idClient);
+
+        $clients = Client::getAll();
+        $cars = Car::getAllWithClients();;
        // dd($client);
         return view('form-edit', compact('car', 'client'));
     }
@@ -119,6 +117,43 @@ class CarController extends Controller
         return redirect()->route('cars.index');
     }
 
+    public function deleteCarClient(Request $request, $idCar, $idClient)
+    {
+//        var_dump($idCar);
+//        var_dump($idClient);
+//        die();
+        //dd(Client::getCountCars($idClient));
+        $car=Car::getById($idCar);
+        $client=Car::getById($idClient);
+        $carCount = Client::getCountCars($idClient) -> carCount;
+
+        if($car != null)
+        {
+            Car::deleteById($idCar);
+        }
+        if($carCount == 1 )
+        {
+            Client::deleteById($idClient);
+        }
+
+
+
+        return redirect()->route('cars.index');
+    }
+
+
+    public function parkingCarClient(Request $request)
+    {
+        //var_dump($idCar);
+        //var_dump($idClient);
+        //die();
+        $clients = Client::getAll();
+        $cars = Car::getAllWithClients();
+        // dd($client);
+        return view('parking-car', compact('cars', 'clients'));
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -132,6 +167,6 @@ class CarController extends Controller
      */
     public function destroy(Request $request, $idCar)
     {
-        //услловие удаление и вызов метода delet() у каждой модели
+        //
     }
 }

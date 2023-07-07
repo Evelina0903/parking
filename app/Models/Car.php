@@ -64,4 +64,10 @@ class Car extends Model
         return DB::table('cars')->where('id','=', (integer)$id)->first();
     }
 
+    public static function deleteById($id)
+    {
+        return DB::table('cars')->where('id','=', (integer)$id)->delete();
+    }
+
+
 }
