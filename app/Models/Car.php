@@ -33,7 +33,18 @@ class Car extends Model
             'id_client'=>$client_id,
         ]);
     }
-
+    public static function updateById($params)
+    {
+        DB::table('cars')
+            ->where('id', $params['carId'])
+            ->update([
+            'brand'=>$params['brand'],
+            'model'=>$params['model'],
+            'color'=>$params['color'],
+            'rf_number'=>$params['rf_number'],
+            'parking'=>$params['parking'],
+        ]);
+    }
     public static function getAll()
     {
         $cars = DB::table('cars')->get();
@@ -43,6 +54,14 @@ class Car extends Model
 
     public static function getAllWithClients()
     {
-        return DB::table('cars')->join('clients', 'cars.id_client', '=', 'clients.id')->get();
+        return DB::table('cars')->select('*', 'cars.id as car_id')->join('clients', 'cars.id_client', '=', 'clients.id')->get();
+
     }
+
+    public static function getById($id)
+    {
+        //dd($id);
+        return DB::table('cars')->where('id','=', (integer)$id)->first();
+    }
+
 }

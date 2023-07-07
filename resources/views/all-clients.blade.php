@@ -38,7 +38,7 @@
                     <td>{{ $car->brand }}</td>
                     <td>{{ $car->rf_number }}</td>
                     <td>
-                        <a href="cars/{{ $car->id}}/edit" type="button"
+                        <a href="edit/{{ $car->car_id}}/{{ $car->id_client}}/editCarClient" type="button"
                            class="btn btn-outline-dark d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-pencil-fill" viewBox="0 0 16 16">

@@ -22,11 +22,27 @@ class Client extends Model
         return $id;
     }
 
+    public static function updateById($params)
+    {
+        DB::table('clients')
+            ->where('id', $params['clientId'])
+            ->update([
+                'fio'=>$params['fio'],
+                'gender'=>$params['gender'],
+                'number'=>$params['number'],
+                'addres'=>$params['addres'],
+            ]);
+    }
+
     public static function getAll()
     {
         $clients = DB::table('clients')->get();
         return $clients;
     }
 
+    public static function getById($id)
+    {
+        return DB::table('clients')->where('id', $id)->first();
+    }
 
 }

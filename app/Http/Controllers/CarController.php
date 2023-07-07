@@ -14,10 +14,13 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::getAll();
+
+
         //    $clients = Client::with('cars')->get();
         $clients = Client::getAll();
         $cars = Car::getAllWithClients();
+
+       // dd($clients);
         return view('all-clients', compact('cars', 'clients'));
     }
 
@@ -43,11 +46,8 @@ class CarController extends Controller
             'model' => 'required',
             'color' => 'required',
             'rf_number' => 'required',
-            'fio' => 'required|min:3',
-            'number' => 'required',
 
         ]);
-
 
 
         // dd($request->all());
@@ -56,12 +56,11 @@ class CarController extends Controller
             // Add validation rules for other fields if needed
         ]);
 
-        if ($validatedData['option']  === 'option1') {
+        if ($validatedData['option'] === 'option1') {
             Car::create($request->only(['brand', 'model', 'color', 'rf_number', 'parking', 'id_client']));
             return redirect()->route('cars.index');
-        }
-        else if ($validatedData['option'] === 'option2'){
-            $client_id = Client::create($request->only(['fio', 'gender', 'number','addres']));
+        } else if ($validatedData['option'] === 'option2') {
+            $client_id = Client::create($request->only(['fio', 'gender', 'number', 'addres']));
             Car::createByParametrAndClientId($request->only(['brand', 'model', 'color', 'rf_number', 'parking']), $client_id);
             return redirect()->route('cars.index');
         }
@@ -82,9 +81,42 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+//
+    }
 
-        $clients = Client::getAll();
-        return view('form-edit', compact('clients'));
+    public function editCarClient(Request $request, $idCar, $idClient)
+    {
+        //var_dump($idCar);
+        //var_dump($idClient);
+        //die();
+        $car = Car::getById($idCar);
+        $client = Client::getById($idClient);
+       // dd($client);
+        return view('form-edit', compact('car', 'client'));
+    }
+
+    public function updateCarClient(Request $request, )
+    {
+        //dd($request);
+        $validatedData = $request->validate([
+            'carId' => 'required',
+            'clientId' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'color' => 'required',
+            'rf_number' => 'required',
+            'parking' => 'required',
+            'fio' => 'required',
+            'number' => 'required',
+            'gender' => 'required',
+            'addres' => '',
+
+
+        ]);
+
+        Car::updateById($validatedData);
+        Client::updateById($validatedData);
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -98,8 +130,8 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, $idCar)
     {
-        //
+        //услловие удаление и вызов метода delet() у каждой модели
     }
 }

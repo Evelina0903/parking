@@ -13,6 +13,17 @@ use App\Http\Controllers\CarController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/edit/{idCar}/{idClient}/editCarClient', [CarController::class, 'editCarClient'])->whereNumber(['idCar','idClient']);
+
+Route::put('/updateCarClient', [CarController::class, 'updateCarClient']);
 
 Route::resource('/cars', CarController::class);
+
+
+
+
+
+
+
+
 //oute::resource('/cars', [CarController::class, 'index']);
