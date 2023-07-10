@@ -45,6 +45,15 @@ class Car extends Model
             'parking'=>$params['parking'],
         ]);
     }
+
+    public static function updateParkingById($validatedData)
+    {
+        DB::table('cars')
+            ->where('id', $validatedData['carId'])
+            ->update([
+                'parking'=>$validatedData['parking'],
+            ]);
+    }
     public static function getAll()
     {
         $cars = DB::table('cars')->get();
@@ -58,9 +67,25 @@ class Car extends Model
 
     }
 
+
+    public static function getAllWithClientsLimit($page)
+
+    {
+        return DB::table('cars')->select('*', 'cars.id as car_id')->join('clients', 'cars.id_client', '=', 'clients.id')->skip(($page-1)*5)->take(5)->get();
+
+    }
+
+    public static function getCountPage($row)
+    {
+        return ceil(DB::table('cars')->count('id')/$row);
+    }
+    public static function allCarById($id)
+    {
+        return DB::table('cars')->select('*')->where('id_client', $id)->get();
+    }
+
     public static function getById($id)
     {
-        //dd($id);
         return DB::table('cars')->where('id','=', (integer)$id)->first();
     }
 
@@ -69,5 +94,9 @@ class Car extends Model
         return DB::table('cars')->where('id','=', (integer)$id)->delete();
     }
 
+    public static function getByRfNumber($rf_number)
+    {
+        return DB::table('cars')->where('rf_number', '=', $rf_number)->first();
+    }
 
 }

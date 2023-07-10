@@ -40,6 +40,16 @@ class Client extends Model
         return $clients;
     }
 
+    public static function getAllParking($page)
+    {
+        return DB::table('clients')->skip(($page-1)*3)->take(3)->get();
+
+    }
+    public static function getCountPage($row)
+    {
+
+        return ceil(DB::table('clients')->count('id')/$row);
+    }
     public static function getById($id)
     {
         return DB::table('clients')->where('id', $id)->first();
@@ -53,4 +63,16 @@ class Client extends Model
     {
         return DB::table('clients')->where('id','=', (integer)$id)->delete();
     }
+
+    public static function getAllId()
+    {
+        return DB::table('clients')->pluck('id');
+    }
+
+    public static function getByNumber($number)
+    {
+        return DB::table('clients')->where('number', '=', $number)->first();
+    }
+
+
 }

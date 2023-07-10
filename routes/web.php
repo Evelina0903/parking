@@ -19,9 +19,11 @@ Route::get('/edit/{idCar}/{idClient}/editCarClient', [CarController::class, 'edi
 Route::get('/cars/{idCar}/{idClient}/deleteCarClient', [CarController::class, 'deleteCarClient'])->whereNumber(['idCar','idClient']);
 
 
-Route::get('/parkingCarClient', [CarController::class, 'parkingCarClient']);
+Route::get('/parkingCarClient', [CarController::class, 'parkingCarClient'])->name('parkingCarClient');
 
 Route::put('/updateCarClient', [CarController::class, 'updateCarClient']);
+
+Route::post('/updateCarParking', [CarController::class, 'updateCarParking'])->name('cars.updateParkingById');
 
 Route::resource('/cars', CarController::class);
 
@@ -32,4 +34,3 @@ Route::resource('/cars', CarController::class);
 
 
 
-//oute::resource('/cars', [CarController::class, 'index']);
