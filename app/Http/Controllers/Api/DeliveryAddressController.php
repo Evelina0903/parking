@@ -16,9 +16,7 @@ class DeliveryAddressController extends Controller
      */
     public function index()
     {
-        //return DeliveryAddresses::all();
         return  DeliveryAddressResource::collection(DeliveryAddresses::all());
-
     }
 
     /**
@@ -37,7 +35,6 @@ class DeliveryAddressController extends Controller
      */
     public function show($id)
     {
-       // return DeliveryAddresses::find($id);
         return new DeliveryAddressResource(DeliveryAddresses::findOrFail($id));
     }
 

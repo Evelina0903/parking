@@ -16,7 +16,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        //return UserResource::collection(Users::all());
         return UserResource::collection(Users::with('address')->get());
     }
 
@@ -34,7 +33,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-       // dd(Users::with('address')->findOrFail($id));
         return new UserResource(Users::with('address')->findOrFail($id));
 
     }
