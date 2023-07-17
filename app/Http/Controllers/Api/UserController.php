@@ -54,7 +54,6 @@ class UserController extends Controller
     public function destroy(Users $user)
     {
         $user->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response()->json(['message' => 'Запись успешно удалена'], Response::HTTP_OK);
     }
 }

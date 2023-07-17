@@ -56,7 +56,6 @@ class DeliveryAddressController extends Controller
     public function destroy(DeliveryAddresses $deliveryAddress)
     {
         $deliveryAddress->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response()->json(['message' => 'Запись успешно удалена'], Response::HTTP_OK);
     }
 }
