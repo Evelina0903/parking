@@ -35,16 +35,17 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        Log:info($request->all());
         $request->validate([
             'brand' => 'required',
             'model' => 'required',
             'color' => 'required',
             'rf_number' => 'required',
             'parking' => 'required',
-            'fio' => '',
-            'number' => '',
-            'gender' => '',
-            'addres' => '',
+            'fio' => 'nullable',
+            'number' => 'nullable|max:20',
+            'gender' => 'nullable',
+            'addres' => 'nullable',
 
         ]);
 
