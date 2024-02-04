@@ -29,7 +29,7 @@
                                     <input type="hidden" name="carId" value="{{$car->id}}">
                                     <select name="parking" class="form-select" aria-label="Default select example">
                                         <option selected></option>
-                                        <option value="0" @if ($car->parking == 0) selected @endif>Автомобиль наодится
+                                        <option value="0" @if ($car->parking == 0) selected @endif>Автомобиль находится
                                             на
                                             стоянке
                                         </option>

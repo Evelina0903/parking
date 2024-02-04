@@ -60,7 +60,7 @@
                     <div class="col-sm-10">
                         <select name="parking" class="form-select" aria-label="Default select example" required>
                             <option selected></option>
-                            <option value="0">Автомобиль наодится на стоянке</option>
+                            <option value="0">Автомобиль находится на стоянке</option>
                             <option value="1">Автомобиль отсутствует на стоянке</option>
                         </select>
                     </div>
@@ -68,8 +68,8 @@
 
                 <div class="row mt-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="option" value="option1"
-                               onclick="fieldActivation()" id="flexRadioDefault1" >
+                        <input class="form-check-input client-add-choice-radio" type="radio" name="option" value="option1"
+                                id="flexRadioDefault1" >
                         <p class="fs-5">Добавить клиента:</p>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
 
                 <div class="row mt-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="option" value="option2"
-                               onclick="fieldActivation()" id="flexRadioDefault2" checked>
+                        <input class="form-check-input client-add-choice-radio"  type="radio" name="option" value="option2"
+                                id="flexRadioDefault2" checked>
                         <p class="fs-5">Или создать нового:</p>
                     </div>
                 </div>
