@@ -3,7 +3,9 @@ const element = document.getElementById('number-required');
 const maskOptions = {
     mask: '+{7}(000)000-00-00'
 };
-const mask = IMask(element, maskOptions);
+if (element){
+    const mask = IMask(element, maskOptions);
+}
 let clientAddChoiceRadios=document.getElementsByClassName("client-add-choice-radio");
 for (let input of clientAddChoiceRadios) {
     input.addEventListener("click",fieldActivation)
