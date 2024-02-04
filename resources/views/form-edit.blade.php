@@ -67,7 +67,7 @@
                     <div class="col-sm-10">
                         <select name="parking" class="form-select" aria-label="Default select example" required>
                             <option selected></option>
-                            <option value="0" @if ($car->parking == 0) selected @endif>Автомобиль наодится на стоянке
+                            <option value="0" @if ($car->parking == 0) selected @endif>Автомобиль находится на стоянке
                             </option>
                             <option value="1" @if ($car->parking == 1) selected @endif>Автомобиль отсутствует на
                                 стоянке
